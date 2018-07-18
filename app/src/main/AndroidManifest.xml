@@ -19,8 +19,23 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".PopupMenu" >
+            android:name=".DashboardAddMenu" >
+        </activity>
+        <activity
+            android:name=".DashboardEditMenu" >
+        </activity>
+        <activity
+            android:name=".TimetableMenu" >
+        </activity>
+        <activity
+            android:name=".SubjectMenu" >
+        </activity>
+        <activity
+            android:name=".ExpenditureMenu" >
+        </activity>
+        <activity
+            android:name=".ExpenditureMenu2" >
         </activity>
     </application>
-
+    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
 </manifest>

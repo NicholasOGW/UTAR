@@ -14,7 +14,7 @@ import android.support.design.widget.CoordinatorLayout;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.app.FragmentManager;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.ActionBar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -46,7 +46,7 @@ public class Main extends AppCompatActivity {
         actionBar.setTitle("Dashboard");
 
         Fragment fragment = new DashboardFragment();
-        displayFragment(fragment, null, "data");
+        displayFragment(fragment, null);
     }
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
@@ -58,46 +58,41 @@ public class Main extends AppCompatActivity {
             switch (item.getItemId()) {
                 case R.id.navigation_dashboard:
                     fragment = new DashboardFragment();
+                    actionBar.setTitle("Dashboard");
                     break;
                 case R.id.navigation_timetable:
                     fragment = new TimetableFragment();
+                    actionBar.setTitle("Timetable");
                     break;
                 case R.id.navigation_subject:
                     fragment = new SubjectFragment();
+                    actionBar.setTitle("Subject");
                     break;
                 case R.id.navigation_feedback:
                     fragment = new FeedbackFragment();
+                    actionBar.setTitle("Feedback");
                     break;
                 case R.id.navigation_expenditure:
                     fragment = new ExpenditureFragment();
+                    actionBar.setTitle("Expenditure Planning");
                     break;
             }
-            displayFragment(fragment, null, "data");
+            displayFragment(fragment, null);
 
             return true;
         }
     };
 
-    public void displayFragment(Fragment fragment, Bundle bundle, String tag) {
+    public void displayFragment(Fragment fragment, Bundle bundle) {
 
         if (fragment != null) {
             if (bundle != null)
                 fragment.setArguments(bundle);
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-            ft.replace(R.id.frame_container, fragment, tag);
+            ft.replace(R.id.frame_container, fragment);
             ft.addToBackStack("fragment");
             ft.commit();
         }
-
-//    private void loadFragment(android.support.v4.app.Fragment fragment) {
-//        // load fragment
-//        android.support.v4.app.FragmentManager fm = getSupportFragmentManager();
-////        FragmentManager fm= getSupportFragmentManager();
-//        android.support.v4.app.FragmentTransaction transaction = fm.beginTransaction();
-//        transaction.replace(R.id.frame_container, fragment);
-//        transaction.addToBackStack(null);
-//        transaction.commit();
-//    }
     }
 }
 

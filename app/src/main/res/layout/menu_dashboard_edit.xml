@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Select Event Type: "
+        android:layout_alignParentLeft="true"
+        android:id="@+id/popup"
+        android:textSize="16dp"
+        android:paddingTop="20dp"
+        android:paddingLeft="10dp"
+        />
+
+    <Spinner
+        android:id="@+id/spinnerPopupMenu"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_toRightOf="@+id/popup"
+        android:paddingTop="20dp">
+    </Spinner>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Event title: "
+        android:layout_alignParentLeft="true"
+        android:textSize="16dp"
+        android:paddingTop="20dp"
+        android:paddingLeft="10dp"
+        android:layout_below="@+id/popup"
+        android:id="@+id/title"
+        />
+
+    <EditText
+        android:id="@+id/eventTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_toRightOf="@+id/title"
+        android:layout_below="@+id/spinnerPopupMenu"
+        android:paddingTop="20dp"
+        />
+
+    <EditText
+        android:id="@+id/date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/title"
+        android:paddingTop="20dp"
+        android:textSize="16dp"
+        android:gravity="center"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        android:hint="@string/date"
+        android:onClick="showDatePickerDialog"
+        />
+    <EditText
+        android:id="@+id/time"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/date"
+        android:paddingTop="20dp"
+        android:textSize="16dp"
+        android:gravity="center"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        android:hint="@string/time"
+        android:onClick="showTimePickerDialog"
+        />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/time"
+        android:weightSum="1">
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.33"
+            android:layout_margin="10dp"
+            android:text="Update"
+            android:layout_alignParentLeft="true"
+            android:id="@+id/btnUpdate"
+            />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.33"
+            android:layout_margin="10dp"
+            android:text="Cancel"
+            android:layout_alignParentRight="true"
+            android:layout_toRightOf="@+id/btnAdd"
+            android:id="@+id/btnCancel"
+            />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.33"
+            android:layout_margin="10dp"
+            android:text="Delete"
+            android:textColor="@color/red"
+            android:layout_alignParentRight="true"
+            android:layout_toRightOf="@+id/btnCancel"
+            android:id="@+id/btnDelete"
+            />
+    </LinearLayout>
+</RelativeLayout>

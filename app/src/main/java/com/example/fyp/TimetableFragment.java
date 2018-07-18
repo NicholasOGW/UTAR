@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
@@ -11,15 +12,25 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 import java.util.ArrayList;
-import me.yaoandy107.ntut_timetable.CourseTableLayout;
-import me.yaoandy107.ntut_timetable.model.CourseInfo;
-import me.yaoandy107.ntut_timetable.model.StudentCourse;
+import com.example.fyp.CourseTableLayout;
+import com.example.fyp.CourseInfo;
+import com.example.fyp.StudentCourse;
 
 public class TimetableFragment extends Fragment {
-//    @Override
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_timetable, container, false);
+
+        FloatingActionButton fab = (FloatingActionButton) v.findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent in = new Intent(getActivity(), com.example.fyp.TimetableMenu.class);
+                startActivity(in);
+            }
+        });
+
         CourseTableLayout courseTable = (CourseTableLayout) v.findViewById(R.id.courseTable);
         StudentCourse studentCourse = new StudentCourse();
         ArrayList<CourseInfo> courseInfoList = new ArrayList<>();
@@ -27,7 +38,7 @@ public class TimetableFragment extends Fragment {
         // Add course1 - sample1
         CourseInfo courseInfo1 = new CourseInfo();
         courseInfo1.setName("Course 1");
-        courseInfo1.setCourseTime("1 2", "", "4", "", "", "", "");
+        courseInfo1.setCourseTime("8 9", "10 11", "12 1", "3 4", "", "", "");
         courseInfoList.add(courseInfo1);
 
         // Add course2 - sample2
@@ -42,34 +53,5 @@ public class TimetableFragment extends Fragment {
 
         return v;
     }
-//
-//    @Override
-//    protected void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-
-//    @Override
-//    protected void onCreate(Bundle savedInstanceState) {
-//    super.onCreate(savedInstanceState);
-//    setContentView(R.layout.activity_main);
-//
-//    CourseTableLayout courseTable = findViewById(R.id.courseTable);
-//    StudentCourse studentCourse = new StudentCourse();
-//    ArrayList<CourseInfo> courseInfoList = new ArrayList<>();
-//
-//    // Add course1 - sample1
-//    CourseInfo courseInfo1 = new CourseInfo();
-//    courseInfo1.setName("Course 1");
-//    courseInfo1.setCourseTime("1 2", "", "4", "", "", "", "");
-//    courseInfoList.add(courseInfo1);
-//
-//    // Add course2 - sample2
-//    CourseInfo courseInfo2 = new CourseInfo();
-//    courseInfo2.setName("Course 2");
-//    courseInfo2.setCourseTime(new String[]{"4", "5", "3", "6 7 8", "", "", ""});
-//    courseInfoList.add(courseInfo2);
-//
-//    // Set timetable
-//    studentCourse.setCourseList(courseInfoList);
-//    courseTable.setStudentCourse(studentCourse);
 }
 

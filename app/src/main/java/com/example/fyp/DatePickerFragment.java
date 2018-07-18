@@ -31,8 +31,8 @@ public class DatePickerFragment
         calendar.add(Calendar.DAY_OF_MONTH, 1);
         dp.setMinDate(calendar.getTimeInMillis());
 
-        // Example, set maximum Date to 2020-12-31
-        calendar.set(Calendar.YEAR, 2020);
+        // Example, set maximum Date to 2030-12-31
+        calendar.set(Calendar.YEAR, 2030);
         calendar.set(Calendar.MONTH, 11);   // In Java, months are counted from 0 to 11.
         calendar.set(Calendar.DAY_OF_MONTH, 31);
         dp.setMaxDate(calendar.getTimeInMillis());

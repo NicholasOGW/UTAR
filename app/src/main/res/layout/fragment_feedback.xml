@@ -1,14 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".FeedbackFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <!--<TextView-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent"-->
-        <!--android:text="@string/hello_blank_fragment" />-->
+    <!--<WebView  xmlns:android="http://schemas.android.com/apk/res/android"-->
+        <!--android:id="@+id/webview"-->
+        <!--android:layout_width="fill_parent"-->
+        <!--android:layout_height="fill_parent"-->
+        <!--/>-->
 
-</FrameLayout>
+    <Button
+        android:id="@+id/check"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Click this button to check valid Student Survey Period"
+        android:textSize="16dp"/>
+
+    <Button
+        android:id="@+id/survey"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Click this button to direct to Student Survey"
+        android:textSize="16dp"
+        android:layout_below="@+id/check"/>
+
+</RelativeLayout>
