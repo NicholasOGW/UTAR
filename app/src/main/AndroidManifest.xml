@@ -2,40 +2,72 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.fyp">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme"
-        >
+        android:theme="@style/AppTheme">
         <activity
             android:name=".Main"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".DashboardAddMenu" >
+        <activity android:name=".DashboardAddMenu" />
+        <activity android:name=".DashboardEditMenu" />
+        <activity android:name=".TimetableAddMenu" />
+        <activity android:name=".SubjectMenu" />
+        <activity android:name=".ExpenditureAddMenu" />
+        <activity android:name=".ExpenditureEditMenu" />
+        <activity android:name=".ExpenditureAddInitialMenu" />
+        <activity android:name=".ExpenditurePieChart" />
+        <activity android:name=".SubjectEditMenu" />
+        <activity android:name=".SubjectAddMenu" />
+        <activity android:name=".SubjectDetailMenu" />
+        <activity android:name=".TimetableEditMenu" />
+
+        <receiver android:name=".WidgetCountdown">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/widget_countdown_info" />
+        </receiver>
+
+        <activity android:name=".WidgetCountdownConfigureActivity">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE" />
+            </intent-filter>
         </activity>
-        <activity
-            android:name=".DashboardEditMenu" >
-        </activity>
-        <activity
-            android:name=".TimetableMenu" >
-        </activity>
-        <activity
-            android:name=".SubjectMenu" >
-        </activity>
-        <activity
-            android:name=".ExpenditureMenu" >
-        </activity>
-        <activity
-            android:name=".ExpenditureMenu2" >
+
+        <receiver android:name=".WidgetTimetable">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/widget_timetable_info" />
+        </receiver>
+
+        <activity android:name=".WidgetTimetableConfigureActivity">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE" />
+            </intent-filter>
         </activity>
     </application>
-    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
+
 </manifest>

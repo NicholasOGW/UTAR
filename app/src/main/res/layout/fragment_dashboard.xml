@@ -60,6 +60,6 @@
             android:layout_margin="24dp"
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
-            app:srcCompat="@android:drawable/ic_input_add" />
+            app:srcCompat="@android:drawable/ic_menu_add" />
     </RelativeLayout>
 </FrameLayout>

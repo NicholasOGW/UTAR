@@ -15,6 +15,7 @@ import android.view.animation.Animation;
 import android.view.animation.OvershootInterpolator;
 import android.view.animation.TranslateAnimation;
 import android.widget.LinearLayout;
+import android.widget.TableRow;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,18 +54,6 @@ public class CourseTableLayout extends LinearLayout {
         String[] temp = timeString.split(" ");
         for (String t : temp) {
             switch (t) {
-                case "A":
-                    infos.add("10");
-                    break;
-                case "B":
-                    infos.add("11");
-                    break;
-                case "C":
-                    infos.add("12");
-                    break;
-                case "D":
-                    infos.add("13");
-                    break;
                 default:
                     infos.add(t);
                     break;
@@ -124,16 +113,51 @@ public class CourseTableLayout extends LinearLayout {
             for (int j = 0; j < TABLE_COL; j++) {
                 CourseBlock tableCell = new CourseBlock(getContext());
                 if (j == 0 && i > 0) {
-                    tableCell.setText(Integer.toHexString(i).toUpperCase(
-                            Locale.US));
+                    if (i==1){
+                        tableCell.setText("" + (8));
+                    }
+                    if (i==2){
+                        tableCell.setText("" + (9));
+                    }
+                    if (i==3){
+                        tableCell.setText("" + (10));
+                    }
+                    if (i==4){
+                        tableCell.setText("" + (11));
+                    }
+                    if (i==5){
+                        tableCell.setText("" + (12));
+                    }
+                    if (i==6){
+                        tableCell.setText("" + (1));
+                    }
+                    if (i==7){
+                        tableCell.setText("" + (2));
+                    }
+                    if (i==8){
+                        tableCell.setText("" + (3));
+                    }
+                    if (i==9){
+                        tableCell.setText("" + (4));
+                    }
+                    if (i==10){
+                        tableCell.setText("" + (5));
+                    }
+                    if (i==11){
+                        tableCell.setText("" + (6));
+                    }
+                    if (i==12){
+                        tableCell.setText("" + (7));
+                    }
+                    if (i==13){
+                        tableCell.setText("" + (8));
+                    }
                 }
                 tableCell.setId(j != TABLE_COL - 1 ? i : 14);
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                     tableCell.setZ(5.0f);
                 }
                 cell_params.setMargins(5, 5, 5, 5);
-//                    tableCell.setBackgroundResource(R.drawable.shape);
-//                    tableCell.setElevation(20.0f);
                 tableCell.setLayoutParams(j == 0 ? title_col_params
                         : cell_params);
                 tableRow.addView(tableCell);
@@ -234,13 +258,13 @@ public class CourseTableLayout extends LinearLayout {
     private int[] getColorArray(int color_count) {
         int[] colorArray = new int[color_count];
         int[] ints = getContext().getResources().getIntArray(R.array.course_table);
-        List<Integer> defaultColor = new ArrayList<>();
+        List<Integer> defaoultColor = new ArrayList<>();
         for (int i : ints) {
-            defaultColor.add(i);
+            defaoultColor.add(i);
         }
         for (int i = 0; i < color_count; i++) {
-            int random = (int) (Math.random() * defaultColor.size());
-            colorArray[i] = defaultColor.remove(random);
+            int random = (int) (Math.random() * defaoultColor.size());
+            colorArray[i] = defaoultColor.remove(random);
         }
         return colorArray;
     }

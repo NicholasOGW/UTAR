@@ -17,8 +17,21 @@
         <item>Exam</item>
         <item>To-do list</item>
     </string-array>
+    <string-array name="spinner_expenses_type">
+        <item>Education</item>
+        <item>Entertainment</item>
+        <item>Shopping</item>
+        <item>Auto and Transport</item>
+        <item>Personal Care</item>
+        <item>Health and Fitness</item>
+        <item>Food and Dining</item>
+        <item>Fees and Charges</item>
+        <item>Others</item>
+    </string-array>
 
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="appwidget_text">EXAMPLE</string>
+    <string name="configure">Configure</string>
+    <string name="add_widget">Add widget</string>
 
 </resources>

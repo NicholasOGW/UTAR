@@ -6,6 +6,81 @@
     tools:context=".ExpenditureFragment"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="1"
+        android:id="@+id/initial_title"
+
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="35sp"
+            android:textColor="#000000"
+            android:layout_weight="0.5"
+            android:text="Initial Amount:"
+            />
+
+        <TextView
+            android:id="@+id/initial_amount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="35sp"
+            android:textColor="#000000"
+            android:layout_weight="0.5"
+            android:hint="0"
+            android:textAlignment="center"
+            android:background="#cdc9c9"
+            />
+    </LinearLayout>
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/list_expenditure"
+        android:layout_below="@+id/initial_title">
+    </ListView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="1"
+        android:id="@+id/final_title"
+        android:layout_alignBottom="@+id/list_expenditure"
+        >
+
+        <TextView
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.3"
+            android:text="Remaining:"
+            android:textColor="#000000"
+            android:textSize="35sp" />
+
+        <TextView
+            android:id="@+id/final_amount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="35sp"
+            android:textColor="#000000"
+            android:layout_weight="0.3"
+            android:background="#cdc9c9"
+            android:textAlignment="center"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="35sp"
+            android:textColor="#000000"
+            android:layout_weight="0.4"
+            />
+    </LinearLayout>
+
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
         android:layout_width="56dp"
@@ -14,6 +89,9 @@
         android:layout_margin="24dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        app:srcCompat="@android:drawable/ic_input_add" />
+        app:srcCompat="@android:drawable/ic_menu_add"
+        />
+
+
 
 </RelativeLayout>

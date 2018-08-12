@@ -9,7 +9,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 import android.support.v7.app.ActionBar;
 
@@ -64,7 +63,7 @@ public class DashboardAddMenu extends AppCompatActivity{
                 String date = etDate.getText().toString();
                 String time = etTime.getText().toString();
 
-                TaskDbQueries dbq = new TaskDbQueries(new TaskDbHelper(getApplicationContext()));
+                TaskDbQueries dbq = new TaskDbQueries(new DbHelper(getApplicationContext()));
                 Task task = new Task(type, title, date,time);
                 if(dbq.insert(task) != 0) {
                     saved = true;

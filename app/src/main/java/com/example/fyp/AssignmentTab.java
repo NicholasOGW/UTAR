@@ -11,12 +11,6 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-import java.lang.reflect.Type;
-
-
-/**
- * A simple {@link Fragment} subclass.
- */
 public class AssignmentTab extends Fragment {
     public static final String EXTRA_ID = "com.example.fyp.ID";
     private ListView listView;
@@ -43,7 +37,7 @@ public class AssignmentTab extends Fragment {
     public void onResume() {
         super.onResume();
 
-        TaskDbQueries dbq = new TaskDbQueries(new TaskDbHelper(getActivity().getApplicationContext()));
+        TaskDbQueries dbq = new TaskDbQueries(new DbHelper(getActivity().getApplicationContext()));
 
         String[] columns = {
                 TaskContract.TaskEntry._ID,

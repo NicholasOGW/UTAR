@@ -3,7 +3,6 @@ package com.example.fyp;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -37,7 +36,7 @@ public class DashboardEditMenu extends AppCompatActivity {
         Intent intent = getIntent();
         long id = intent.getLongExtra(AllTab.EXTRA_ID, 0);
 
-       TaskDbQueries dbq = new TaskDbQueries(new TaskDbHelper(getApplicationContext()));
+       TaskDbQueries dbq = new TaskDbQueries(new DbHelper(getApplicationContext()));
 
         final String[] columns = {
                 TaskContract.TaskEntry._ID,
@@ -60,8 +59,6 @@ public class DashboardEditMenu extends AppCompatActivity {
                     cursor.getString(cursor.getColumnIndex(TaskContract.TaskEntry.COLUMN_DATE)),
                     cursor.getString(cursor.getColumnIndex(TaskContract.TaskEntry.COLUMN_TIME))
             );
-
-            setTitle(task.getTitle());
 
             final Spinner spinner = (Spinner)findViewById(R.id.spinnerPopupMenu);
             final EditText etTitle = (EditText)findViewById(R.id.eventTitle);
@@ -97,7 +94,7 @@ public class DashboardEditMenu extends AppCompatActivity {
                     task.setDate(etDate.getText().toString());
                     task.setTime(etTime.getText().toString());
 
-                    TaskDbQueries dbq = new TaskDbQueries(new TaskDbHelper(getApplicationContext()));
+                    TaskDbQueries dbq = new TaskDbQueries(new DbHelper(getApplicationContext()));
                     dbq.update(task);
 
                     finish();
@@ -116,7 +113,7 @@ public class DashboardEditMenu extends AppCompatActivity {
             btnDelete.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                 TaskDbQueries dbq = new TaskDbQueries(new TaskDbHelper(getApplicationContext()));
+                 TaskDbQueries dbq = new TaskDbQueries(new DbHelper(getApplicationContext()));
                  dbq.delete(task.getId());
                  finish();
                 }

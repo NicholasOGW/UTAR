@@ -1,6 +1,7 @@
 package com.example.fyp;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -30,6 +31,8 @@ import com.example.fyp.SubjectFragment;
 import com.example.fyp.FeedbackFragment;
 import com.example.fyp.ExpenditureFragment;
 
+import static com.example.fyp.R.id.navigation_timetable;
+
 public class Main extends AppCompatActivity {
 
     ActionBar actionBar;
@@ -46,22 +49,24 @@ public class Main extends AppCompatActivity {
         actionBar.setTitle("Dashboard");
 
         Fragment fragment = new DashboardFragment();
-        displayFragment(fragment, null);
+        displayFragment(fragment, null, "");
     }
 
-    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
+    public BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             Fragment fragment = null;
+            String tag = "";
             switch (item.getItemId()) {
                 case R.id.navigation_dashboard:
                     fragment = new DashboardFragment();
                     actionBar.setTitle("Dashboard");
                     break;
-                case R.id.navigation_timetable:
+                case navigation_timetable:
                     fragment = new TimetableFragment();
+                    tag = "FRAG_TIMETABLE";
                     actionBar.setTitle("Timetable");
                     break;
                 case R.id.navigation_subject:
@@ -77,22 +82,36 @@ public class Main extends AppCompatActivity {
                     actionBar.setTitle("Expenditure Planning");
                     break;
             }
-            displayFragment(fragment, null);
+            displayFragment(fragment, null, tag);
 
             return true;
         }
     };
 
-    public void displayFragment(Fragment fragment, Bundle bundle) {
+    public void displayFragment(Fragment fragment, Bundle bundle, String tag) {
 
         if (fragment != null) {
             if (bundle != null)
                 fragment.setArguments(bundle);
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-            ft.replace(R.id.frame_container, fragment);
+            ft.replace(R.id.frame_container, fragment, tag);
             ft.addToBackStack("fragment");
             ft.commit();
         }
     }
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        super.onActivityResult(requestCode, resultCode, data);
+        if ((requestCode == 10001) && (resultCode == 10001)) {
+
+            Fragment fragment  = new Fragment();
+            android.support.v4.app.FragmentTransaction fragmentTransaction =
+                    getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.frame_container, fragment);
+            fragmentTransaction.commit();
+        }
+    }
+
 }
 

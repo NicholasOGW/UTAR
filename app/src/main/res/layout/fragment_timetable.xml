@@ -1,11 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".TimetableFragment"
     android:orientation="vertical"
+    android:id="@+id/swipe_container"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
     <com.example.fyp.CourseTableLayout
         android:id="@+id/courseTable"
@@ -21,5 +26,5 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         app:srcCompat="@android:drawable/ic_menu_edit" />
-
-</RelativeLayout>
+    </RelativeLayout>
+</android.support.v4.widget.SwipeRefreshLayout>

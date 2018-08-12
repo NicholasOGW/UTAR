@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Select Event Type: "
+        android:layout_alignParentLeft="true"
+        android:id="@+id/popup"
+        android:textSize="16dp"
+        android:paddingTop="20dp"
+        android:paddingLeft="10dp"
+        />
+
+    <Spinner
+        android:id="@+id/spinnerPopupMenu"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_toRightOf="@+id/popup"
+        android:paddingTop="20dp">
+    </Spinner>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Expenses title: "
+        android:layout_alignParentLeft="true"
+        android:textSize="16dp"
+        android:paddingTop="20dp"
+        android:paddingLeft="10dp"
+        android:id="@+id/title"
+        android:layout_below="@+id/popup"
+        />
+
+    <EditText
+        android:id="@+id/expensesTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/spinnerPopupMenu"
+        android:layout_alignParentRight="true"
+        android:layout_toRightOf="@+id/title"
+        android:paddingTop="20dp"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Expenses Amount: "
+        android:layout_alignParentLeft="true"
+        android:textSize="16dp"
+        android:paddingTop="20dp"
+        android:paddingLeft="10dp"
+        android:id="@+id/amountTitle"
+        android:layout_below="@+id/title"
+        android:inputType="numberDecimal"
+        />
+
+    <EditText
+        android:id="@+id/amount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_toRightOf="@+id/amountTitle"
+        android:paddingTop="20dp"
+        android:layout_below="@+id/title"
+        android:inputType="numberDecimal"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/amount"
+        android:weightSum="1">
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.33"
+            android:layout_margin="10dp"
+            android:text="Update"
+            android:layout_alignParentLeft="true"
+            android:id="@+id/btnUpdate"
+            />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.33"
+            android:layout_margin="10dp"
+            android:text="Cancel"
+            android:layout_alignParentRight="true"
+            android:layout_toRightOf="@+id/btnAdd"
+            android:id="@+id/btnCancel"
+            />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.33"
+            android:layout_margin="10dp"
+            android:text="Delete"
+            android:textColor="@color/red"
+            android:layout_alignParentRight="true"
+            android:layout_toRightOf="@+id/btnCancel"
+            android:id="@+id/btnDelete"
+            />
+    </LinearLayout>
+
+</RelativeLayout>

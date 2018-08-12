@@ -36,7 +36,7 @@ public class AllTab extends Fragment {
     public void onResume() {
         super.onResume();
 
-        TaskDbQueries dbq = new TaskDbQueries(new TaskDbHelper(getActivity().getApplicationContext()));
+        TaskDbQueries dbq = new TaskDbQueries(new DbHelper(getActivity().getApplicationContext()));
 
         String[] columns = {
                 TaskContract.TaskEntry._ID,

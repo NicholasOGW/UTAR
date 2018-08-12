@@ -5,9 +5,9 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 public class TaskDbQueries {
-    private TaskDbHelper helper;
+    private DbHelper helper;
 
-    public TaskDbQueries(TaskDbHelper helper) {
+    public TaskDbQueries(DbHelper helper) {
         this.helper = helper;
     }
 
