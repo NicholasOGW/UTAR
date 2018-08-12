@@ -42,8 +42,6 @@ public class TimetableEditMenu extends AppCompatActivity{
         toolbar = getSupportActionBar();
         toolbar.setTitle("Edit Timetable");
 
-//        String title = TimetableFragment.EXTRA_NAME;
-
         CourseInfo item = (CourseInfo)getIntent().getSerializableExtra("courseInfo");
 
         mon = tue= wed = thu= fri = "";
