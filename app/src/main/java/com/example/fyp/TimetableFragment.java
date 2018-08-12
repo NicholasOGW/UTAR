@@ -15,6 +15,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.gson.Gson;
+
 import java.util.ArrayList;
 
 public class TimetableFragment extends Fragment{
@@ -26,18 +28,10 @@ public class TimetableFragment extends Fragment{
     ArrayList<CourseInfo> courseInfoList;
     Intent intent;
     Cursor cursor;
+    Gson gson = new Gson();
     public static String EXTRA_NAME = "com.example.fyp.COURSE_NAME";
-    public static String REFRESH = "com.example.fyp.REFRESH";
 
-
-//    boolean allowRefresh;
-
-//    public void setAllowRefresh(boolean allowRefresh){
-//        this.allowRefresh = allowRefresh;
-//    }
-
-
-//    @Override
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         final View v = inflater.inflate(R.layout.fragment_timetable, container, false);
@@ -46,25 +40,13 @@ public class TimetableFragment extends Fragment{
         studentCourse = new StudentCourse();
         courseInfoList = new ArrayList<>();
 
-//        FragmentTransaction tr = getFragmentManager().beginTransaction();
-//        tr.replace(R.id.frame_container, yourFragmentInstance);
-//        tr.commit()
-//        courseTable.setOnCourseClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                CourseInfo item = (CourseInfo) v.getTag();
-//                Toast.makeText(getActivity(), item +"Clicked", Toast.LENGTH_SHORT);
-//            }
-//        });
         courseTable.setOnCourseClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 CourseInfo item = (CourseInfo) view.getTag();
-                Log.d(item.getName(), item.getName()+ "=NAME");
                 Intent in = new Intent(getActivity(), TimetableEditMenu.class);
-                EXTRA_NAME = item.getName();
-                startActivity(in);
-//                Log.d("onClick", "onClick is called!");
+                in.putExtra("courseInfo", item);
+                startActivityForResult(in, 2);
             }
         });
 
@@ -74,12 +56,25 @@ public class TimetableFragment extends Fragment{
             @Override
             public void onClick(View view) {
                 Intent in = new Intent(getActivity(), TimetableAddMenu.class);
-                startActivity(in);
+                startActivityForResult(in, 1);
             }
         });
 
-//            allowRefresh = false;
             return v;
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        Log.d("RESULT", Integer.toString(requestCode));
+
+        if (requestCode == 1 || requestCode == 2) {
+            if(resultCode == Activity.RESULT_OK){
+                Fragment frg = null;
+                frg = getFragmentManager().findFragmentByTag("FRAG_TIMETABLE");
+                final FragmentTransaction ft = getFragmentManager().beginTransaction();
+                ft.detach(frg).attach(frg).commit();
+            }
+        }
     }
 
     @Override
@@ -112,8 +107,9 @@ public class TimetableFragment extends Fragment{
             );
 
             CourseInfo courseInfo = new CourseInfo();
+            courseInfo.setId(course.getId());
             courseInfo.setName(course.getTitle());
-            courseInfo.setCourseTime(course.getMon(), course.getTues(), course.getWed(), course.getThur(), course.getFri(), "", "");
+            courseInfo.setCourseTime(course.getMon(), course.getTue(), course.getWed(), course.getThu(), course.getFri(), "", "");
             courseInfoList.add(courseInfo);
         }
 

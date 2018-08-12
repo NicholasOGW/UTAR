@@ -1,12 +1,23 @@
 package com.example.fyp;
 
-public class CourseInfo {
+import java.io.Serializable;
+
+public class CourseInfo implements Serializable {
+    private long id;
     private String name = null;
     private String[] times = null;
     private String loaction = null;
 
+    public long getId(){
+        return id;
+    }
+
     public String getName() {
         return name;
+    }
+
+    public void setId(long id){
+        this.id = id;
     }
 
     public void setName(String name) {

@@ -30,9 +30,9 @@ public class CourseDbQueries {
         ContentValues values = new ContentValues();
         values.put(CourseContract.CourseEntry.COLUMN_TITLE, course.getTitle());
         values.put(CourseContract.CourseEntry.COLUMN_MON, course.getMon());
-        values.put(CourseContract.CourseEntry.COLUMN_TUES, course.getTues());
+        values.put(CourseContract.CourseEntry.COLUMN_TUES, course.getTue());
         values.put(CourseContract.CourseEntry.COLUMN_WED, course.getWed());
-        values.put(CourseContract.CourseEntry.COLUMN_THUR, course.getThur());
+        values.put(CourseContract.CourseEntry.COLUMN_THUR, course.getThu());
         values.put(CourseContract.CourseEntry.COLUMN_FRI, course.getFri());
 //        values.put(CourseContract.CourseEntry.COLUMN_LOCATION, course.getlocation());
 
@@ -46,9 +46,9 @@ public class CourseDbQueries {
         ContentValues values = new ContentValues();
         values.put(CourseContract.CourseEntry.COLUMN_TITLE, course.getTitle());
         values.put(CourseContract.CourseEntry.COLUMN_MON, course.getMon());
-        values.put(CourseContract.CourseEntry.COLUMN_TUES, course.getTues());
+        values.put(CourseContract.CourseEntry.COLUMN_TUES, course.getTue());
         values.put(CourseContract.CourseEntry.COLUMN_WED, course.getWed());
-        values.put(CourseContract.CourseEntry.COLUMN_THUR, course.getThur());
+        values.put(CourseContract.CourseEntry.COLUMN_THUR, course.getThu());
         values.put(CourseContract.CourseEntry.COLUMN_FRI, course.getFri());
 //        values.put(CourseContract.CourseEntry.COLUMN_LOCATION, course.getLocation());
 
