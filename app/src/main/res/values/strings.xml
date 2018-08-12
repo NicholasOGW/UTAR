@@ -1,4 +1,9 @@
 <resources>
+    <string name="no_title">No title</string>
+    <string name="configure_title_label">Title</string>
+    <string name="configure_date_label">Date</string>
+    <string name="configure_save">Save</string>
+    <string name="icon_copyright">Application icon:\nCandy Clock, © 2008 cemagraphics\nused with permission</string>
     <string name="app_name">FYP</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_timetable">Timetable</string>

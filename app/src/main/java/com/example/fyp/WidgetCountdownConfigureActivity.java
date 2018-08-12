@@ -35,6 +35,9 @@ public class WidgetCountdownConfigureActivity extends Activity {
         Log.d("", "testing mOnClickListener");
             // When the button is clicked, store the string locally
 
+        mAppWidgetText1 = findViewById(R.id.appwidget_text1);
+        mAppWidgetText2 = findViewById(R.id.appwidget_text2);
+        mAppWidgetText3 = findViewById(R.id.appwidget_text3);
 
         Intent intent1 = getIntent();
         long id1 = intent1.getLongExtra(WidgetCountdownConfigureActivity.EXTRA_ID, 0);
@@ -65,24 +68,29 @@ public class WidgetCountdownConfigureActivity extends Activity {
                     cursor1.getString(cursor1.getColumnIndex(TaskContract.TaskEntry.COLUMN_TITLE)),
                     cursor1.getString(cursor1.getColumnIndex(TaskContract.TaskEntry.COLUMN_DATE)),
                     cursor1.getString(cursor1.getColumnIndex(TaskContract.TaskEntry.COLUMN_TIME))
+
             );
+            String widgetText1 = task.getTitle();
+            String widgetText2 = task.getTime();
+            String widgetText3 = task.getDate();
+
+            Log.d(widgetText1, "COLUMN_TITLE");
+            Log.d(widgetText2, "COLUMN_TIME");
+            Log.d(widgetText3, "COLUMN_DATE");
         }
         Log.d("", "testing list clicked 5");
 
-        mAppWidgetText1 = findViewById(R.id.appwidget_text1);
-        mAppWidgetText2 = findViewById(R.id.appwidget_text2);
-        mAppWidgetText3 = findViewById(R.id.appwidget_text3);
+
         Log.d("", "testing list clicked 6");
 
-//            String widgetText1 = cursor1.getString(cursor1.getColumnIndex(TaskContract.TaskEntry.COLUMN_TITLE));
-//            String widgetText2 = cursor1.getString(cursor1.getColumnIndex(TaskContract.TaskEntry.COLUMN_TIME));
-//            String widgetText3 = cursor1.getString(cursor1.getColumnIndex(TaskContract.TaskEntry.COLUMN_DATE));
-        String widgetText1 = "AAA";
-        String widgetText2 = "BBB";
-        String widgetText3 = "CCC";
-            saveTitlePref(context, mAppWidgetId, widgetText1);
-            saveTitlePref(context, mAppWidgetId, widgetText2);
-            saveTitlePref(context, mAppWidgetId, widgetText3);
+
+
+//        String widgetText1 = "AAA";
+//        String widgetText2 = "BBB";
+//        String widgetText3 = "CCC";
+//            saveTitlePref(context, mAppWidgetId, widgetText1);
+//            saveTitlePref(context, mAppWidgetId, widgetText2);
+//            saveTitlePref(context, mAppWidgetId, widgetText3);
 
             // It is the responsibility of the configuration activity to update the app widget
             AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
@@ -114,7 +122,7 @@ public class WidgetCountdownConfigureActivity extends Activity {
         if (titleValue != null) {
             return titleValue;
         } else {
-            return "COUNTDOWN";
+            return "EXAMPLE";
         }
     }
 
