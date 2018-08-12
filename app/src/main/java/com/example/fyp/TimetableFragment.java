@@ -65,8 +65,6 @@ public class TimetableFragment extends Fragment{
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        Log.d("RESULT", Integer.toString(requestCode));
-
         if (requestCode == 1 || requestCode == 2) {
             if(resultCode == Activity.RESULT_OK){
                 Fragment frg = null;
