@@ -85,7 +85,7 @@ public class TimetableAddMenu extends AppCompatActivity{
 
                 course = new Course();
                 course.setTitle(etTitle.getText().toString());
-                
+
                 course.setMon(mon);
                 course.setTue(tue);
                 course.setWed(wed);
