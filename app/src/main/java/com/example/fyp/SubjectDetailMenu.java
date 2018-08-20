@@ -5,74 +5,62 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.database.Cursor;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.util.Base64;
-import android.util.Log;
 import android.view.View;
-import android.widget.GridView;
-import android.widget.ImageView;
+import android.widget.AdapterView;
 import android.app.Activity;
 import android.graphics.Bitmap;
 import android.provider.MediaStore;
 import android.widget.ListView;
-import android.widget.Toast;
 import android.app.LoaderManager;
 import android.content.CursorLoader;
 import android.content.Loader;
-
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import static com.example.fyp.DbHelper.COLUMN_TYPE;
 
-public class SubjectDetailMenu extends AppCompatActivity {
+
+public class SubjectDetailMenu extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
 
     ActionBar actionBar;
     Subject subject;
-    public static final String EXTRA_ID = "com.example.fyp.ID";
-    private ImageView imageView;
+    public static String EXTRA_IMAGE;
     Bitmap myBitmap;
     Uri picUri;
-    static List<String> myList;
-    private GridView gridview;
-    private String mCurrentPhotoPath;
-    private boolean saved = false;
     private ListView listView;
-    private RecyclerView mRecyclerView;
-//    ImagesAdapter imagesAdapter;
+    ImagesAdapter imagesAdapter;
     DbHelper dbHelper;
     byte[] imageData;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.menu_subject_detail);
 
-        // Set the RecyclerView to its corresponding view
-        mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+        dbHelper = new DbHelper(getApplicationContext());
+        listView = findViewById(R.id.list_view);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+                Cursor cursor = (Cursor)adapterView.getItemAtPosition(position);
 
-        // Set the layout for the RecyclerView to be a linear layout, which measures and
-        // positions items within a RecyclerView into a linear list
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-
-        // Initialize the adapter and attach it to the RecyclerView
-//        imagesAdapter = new ImagesAdapter(this);
-//        mRecyclerView.setAdapter(imagesAdapter);
-
-//        getLoaderManager().initLoader(IMAGES_LOADER, null, this);
-
+                Intent intent = new Intent(SubjectDetailMenu.this, SubjectDetailEditMenu.class);
+                EXTRA_IMAGE = cursor.getString(cursor.getColumnIndex(DbHelper.COLUMN_TYPE));
+                SubjectDetailMenu.this.startActivity(intent);
+            }
+        });
 
         Intent intent = getIntent();
-        long id = intent.getLongExtra(SubjectDetailMenu.EXTRA_ID, 0);
+        long id = intent.getLongExtra(SubjectFragment.EXTRA_ID, 0);
 
         SubjectDbQueries dbq = new SubjectDbQueries(new DbHelper(getApplicationContext()));
 
@@ -105,11 +93,11 @@ public class SubjectDetailMenu extends AppCompatActivity {
         }
     }
 
-//    @Override
+    @Override
     public Loader<Cursor> onCreateLoader(int i, Bundle bundle) {
         // Define a projection that specifies the columns from the table we care about.
         String[] projection = {
-                DbHelper.COLUMN_IMAGE,
+                COLUMN_TYPE,
         };
 
         // This loader will execute the ContentProvider's query method on a background thread
@@ -121,40 +109,30 @@ public class SubjectDetailMenu extends AppCompatActivity {
                 null);
     }
 
-//    @Override
+    @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
-
-//        imagesAdapter.swapCursor(cursor);
+        imagesAdapter.swapCursor(cursor);
     }
 
-//    @Override
+    @Override
     public void onLoaderReset(Loader<Cursor> loader) {
-
-//        imagesAdapter.swapCursor(null);
-
+        imagesAdapter.swapCursor(null);
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode == Activity.RESULT_OK) {
-            ImageView imageView = findViewById(R.id.imageView);
-
             if (getPickImageResultUri(data) != null) {
                 picUri = getPickImageResultUri(data);
                 try {
                     myBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), picUri);
-                    myBitmap = getResizedBitmap(myBitmap, 500);
-                    imageView.setImageBitmap(myBitmap);
+                    myBitmap = getResizedBitmap(myBitmap, 1000);
 
-//                    imageData = bitmapToByte(myBitmap);
-
-//                    ByteArrayOutputStream baos = new ByteArrayOutputStream();
-//                    myBitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
-//                    byte[] data = baos.toByteArray();
-//                    dbHelper.addToDb(subject.getTitle(), imageData);
-                    Toast.makeText(this, "Image saved to DB successfully", Toast.LENGTH_SHORT).show();
+                    ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                    myBitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+                    imageData = baos.toByteArray();
+                    dbHelper.addToDb(subject.getTitle(), imageData);
                     finish();
-
 
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -247,45 +225,12 @@ public class SubjectDetailMenu extends AppCompatActivity {
         return outputFileUri;
     }
 
-//    public String BitMapToString(Bitmap bitmap){
-//        ByteArrayOutputStream baos=new  ByteArrayOutputStream();
-//        bitmap.compress(Bitmap.CompressFormat.PNG,100, baos);
-//        byte [] b=baos.toByteArray();
-//        String temp=Base64.encodeToString(b, Base64.DEFAULT);
-//        return temp;
-//    }
-
-    // Bitmap to byte[]
-    public byte[] bitmapToByte(Bitmap bitmap) {
-        try {
-            ByteArrayOutputStream stream = new ByteArrayOutputStream();
-            //bitmap to byte[] stream
-            bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
-            byte[] x = stream.toByteArray();
-            //close stream to save memory
-            stream.close();
-            return x;
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return null;
+    @Override
+    public void onResume() {
+        super.onResume();
+        ImageDbQueries dbq = new ImageDbQueries(new DbHelper(this.getApplicationContext()));
+        Cursor cursor = dbq.query(null, "type = \""+subject.getTitle()+"\"", null, null, null, null);
+        ImageCursorAdapter adapter = new ImageCursorAdapter(this, cursor, 0);
+        listView.setAdapter(adapter);
     }
-
-//    @Override
-//    public void onResume() {
-//        super.onResume();
-//
-//        ImageDbQueries dbq = new ImageDbQueries(new DbHelper(this.getApplicationContext()));
-//
-//        String[] columns = {
-//                ImageContract.ImageEntry._ID,
-//                ImageContract.ImageEntry.COLUMN_TYPE,
-//                ImageContract.ImageEntry.COLUMN_IMAGE
-//        };
-//        Cursor cursor = dbq.query(columns, null, null, null, null, null);
-//
-//        ImageCursorAdapter adapter = new ImageCursorAdapter(this, cursor, 0);
-//
-//        listView.setAdapter(adapter);
-//    }
 }

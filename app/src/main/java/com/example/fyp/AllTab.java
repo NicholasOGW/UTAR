@@ -18,7 +18,7 @@ public class AllTab extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v =  inflater.inflate(R.layout.tab_all, container, false);
-        listView = (ListView)v.findViewById(R.id.list_all);
+        listView = v.findViewById(R.id.list_all);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {

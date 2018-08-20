@@ -12,7 +12,6 @@ import android.widget.Button;
 import android.widget.EditText;
 
 public class SubjectEditMenu extends AppCompatActivity {
-    public static final String EXTRA_SUBJECT = "com.example.fyp.SUBJECT";
     ArrayAdapter<CharSequence> adapter;
     private ActionBar actionBar;
     private Subject subject;
@@ -50,20 +49,16 @@ public class SubjectEditMenu extends AppCompatActivity {
                     cursor.getString(cursor.getColumnIndex(SubjectContract.SubjectEntry.COLUMN_TITLE))
             );
 
-            final EditText etTitle = (EditText)findViewById(R.id.subjectTitle);
-
+            final EditText etTitle = findViewById(R.id.subjectTitle);
             etTitle.setText(subject.getTitle());
-
 
             Button btnUpdate = findViewById(R.id.btnUpdate);
             btnUpdate.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     subject.setTitle(etTitle.getText().toString());
-
                     SubjectDbQueries dbq = new SubjectDbQueries(new DbHelper(getApplicationContext()));
                     dbq.update(subject);
-
                     finish();
                 }
             });
@@ -81,8 +76,8 @@ public class SubjectEditMenu extends AppCompatActivity {
                 @Override
                 public void onClick(View view) {
                     SubjectDbQueries dbq = new SubjectDbQueries(new DbHelper(getApplicationContext()));
-                 dbq.delete(subject.getId());
-                 finish();
+                    dbq.delete(subject.getId());
+                    finish();
                 }
             });
         }

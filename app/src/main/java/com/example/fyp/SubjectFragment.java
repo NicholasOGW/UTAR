@@ -20,12 +20,11 @@ public class SubjectFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v =  inflater.inflate(R.layout.fragment_subject, container, false);
-        listView = (ListView)v.findViewById(R.id.list_subject);
+        listView = v.findViewById(R.id.list_subject);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
                 Cursor cursor = (Cursor)adapterView.getItemAtPosition(position);
-
                 Intent intent = new Intent(SubjectFragment.this.getActivity(), SubjectDetailMenu.class);
                 intent.putExtra(EXTRA_ID, cursor.getLong(cursor.getColumnIndex(SubjectContract.SubjectEntry._ID)));
                 SubjectFragment.this.startActivity(intent);
@@ -36,11 +35,9 @@ public class SubjectFragment extends Fragment {
             @Override
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, int position, long id) {
                 Cursor cursor = (Cursor)adapterView.getItemAtPosition(position);
-
                 Intent intent = new Intent(SubjectFragment.this.getActivity(), SubjectEditMenu.class);
                 intent.putExtra(EXTRA_ID, cursor.getLong(cursor.getColumnIndex(SubjectContract.SubjectEntry._ID)));
                 SubjectFragment.this.startActivity(intent);
-
                 return true;
             }
         });
@@ -62,15 +59,12 @@ public class SubjectFragment extends Fragment {
         super.onResume();
 
         SubjectDbQueries dbq = new SubjectDbQueries(new DbHelper(getActivity().getApplicationContext()));
-
         String[] columns = {
                 SubjectContract.SubjectEntry._ID,
                 SubjectContract.SubjectEntry.COLUMN_TITLE
         };
         Cursor cursor = dbq.query(columns, null, null, null, null, SubjectContract.SubjectEntry.COLUMN_TITLE + " ASC");
-
         SubjectCursorAdapter adapter = new SubjectCursorAdapter(getActivity(), cursor, 0);
-
         listView.setAdapter(adapter);
     }
 }

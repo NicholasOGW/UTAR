@@ -4,6 +4,8 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import static com.example.fyp.DbHelper.ITABLE_NAME;
+
 public class ImageDbQueries {
     private DbHelper helper;
 
@@ -15,7 +17,7 @@ public class ImageDbQueries {
         SQLiteDatabase db = helper.getReadableDatabase();
 
         return db.query(
-                ImageContract.ImageEntry.TABLE_NAME,
+                ITABLE_NAME,
                 columns,
                 selection,
                 selectionArgs,
@@ -24,35 +26,35 @@ public class ImageDbQueries {
                 orderBy
         );
     }
-
-    public long insert(Image image) {
-        SQLiteDatabase db = helper.getWritableDatabase();
-        ContentValues values = new ContentValues();
-        values.put(ImageContract.ImageEntry.COLUMN_TYPE, image.getType());
-        values.put(ImageContract.ImageEntry.COLUMN_IMAGE, image.getImage());
-
-        long id = db.insert(ImageContract.ImageEntry.TABLE_NAME, null, values);
-        image.setId(id);
-        return id;
-    }
-
-    public int update(Image image) {
-        SQLiteDatabase db = helper.getWritableDatabase();
-        ContentValues values = new ContentValues();
-        values.put(ImageContract.ImageEntry.COLUMN_TYPE, image.getType());
-        values.put(ImageContract.ImageEntry.COLUMN_IMAGE, image.getImage());
-
-        String selection = ImageContract.ImageEntry._ID + " = ?";
-        String[] selectionArgs = {Long.toString(image.getId())};
-
-        return db.update(
-                ImageContract.ImageEntry.TABLE_NAME,
-                values,
-                selection,
-                selectionArgs
-        );
-    }
-
+//
+//    public long insert(Image image) {
+//        SQLiteDatabase db = helper.getWritableDatabase();
+//        ContentValues values = new ContentValues();
+//        values.put(ImageContract.ImageEntry.COLUMN_TYPE, image.getType());
+//        values.put(ImageContract.ImageEntry.COLUMN_IMAGE, image.getImage());
+//
+//        long id = db.insert(ImageContract.ImageEntry.TABLE_NAME, null, values);
+//        image.setId(id);
+//        return id;
+//    }
+//
+//    public int update(Image image) {
+//        SQLiteDatabase db = helper.getWritableDatabase();
+//        ContentValues values = new ContentValues();
+//        values.put(ImageContract.ImageEntry.COLUMN_TYPE, image.getType());
+//        values.put(ImageContract.ImageEntry.COLUMN_IMAGE, image.getImage());
+//
+//        String selection = ImageContract.ImageEntry._ID + " = ?";
+//        String[] selectionArgs = {Long.toString(image.getId())};
+//
+//        return db.update(
+//                ImageContract.ImageEntry.TABLE_NAME,
+//                values,
+//                selection,
+//                selectionArgs
+//        );
+//    }
+//
     public void delete(long id) {
         SQLiteDatabase db = helper.getWritableDatabase();
 

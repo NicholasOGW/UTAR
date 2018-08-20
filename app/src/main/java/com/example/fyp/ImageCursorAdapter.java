@@ -12,6 +12,8 @@ import android.widget.CursorAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import static com.example.fyp.DbHelper.COLUMN_IMAGE;
+
 public class ImageCursorAdapter extends CursorAdapter {
     private LayoutInflater inflater;
 
@@ -22,13 +24,8 @@ public class ImageCursorAdapter extends CursorAdapter {
 
     public void bindView(View view, Context context, Cursor cursor) {
         ImageView imageView = view.findViewById(R.id.item_image);
-
-        String encodedString = cursor.getString(cursor.getColumnIndex(ImageContract.ImageEntry.COLUMN_IMAGE));
-
-        // Convert String to Bitmap
-        byte [] encodeByte= Base64.decode(encodedString,Base64.DEFAULT);
+        byte [] encodeByte= cursor.getBlob(cursor.getColumnIndex(COLUMN_IMAGE));
         Bitmap bitmap = BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);
-
         imageView.setImageBitmap(bitmap);
     }
 
